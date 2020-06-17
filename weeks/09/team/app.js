@@ -8,7 +8,7 @@ app.use(express.static("public"));
 app.set("views", "views");
 app.set("view engine", "ejs");
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => res.send('Hello Team!'));
 
 app.get('/equate', (req, res) => {
 
