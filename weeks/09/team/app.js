@@ -2,11 +2,7 @@ const express = require('express');
 const url     = require('url');
 
 const app  = express();
-
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
+const port = process.env.PORT || '8000';
 
 app.use(express.static("public"));
 app.set("views", "views");
