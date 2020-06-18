@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Postal Rate Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <form class="form-rate-calculator">
+        <h1 class="h3 mb-3 font-weight-normal text-center">Calculate Postal Rate</h1>
+        <div class="form-group row mb-4 mt-4">
+        
+        </div>
+        <div class="form-group row">
+            <label for="rateType" class="sr-only">Weight</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Weight</div>
+                </div>
+                <input type="number" id="rateType" name="weight" class="form-control" placeholder="1" required>
+                <div class="input-group-append">
+                    <div class="input-group-text">oz</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Get Rate</button>
+        </div>
+    </form>
+
+  <script>
+
+    $( "form" ).on( 'submit', function( event ) {
+
+        event.preventDefault();
+
+        var data = $("form").serialize();
+
+        $.ajax({
+            url: "/getRate",
+            type: "GET",
+            data: data,
+            complete: function(response) {
+                response = response.responseJSON;
+                let message = '';
+                if(response.status === 'success') {
+                    console.log('here 1');
+                    message = 'Your rate is $' + response.rate.toFixed(2);
+                } else {
+                    console.log('here 2');
+                    message = (response.message) ? response.message : 'An unknown error has occurred. Please try again.';
+                }
+                alert(message);
+            }
+        });
+    });
+
+  </script>
+
+</body>
+</html>
