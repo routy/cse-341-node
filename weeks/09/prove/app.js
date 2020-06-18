@@ -38,10 +38,8 @@ app.get('/getRate', (req, res) => {
         }
 
     } else {
-
         params.status = 'error';
         params.message = 'Please select a valid mail type and weight (oz).';
-
     }
 
     res.json(params);
