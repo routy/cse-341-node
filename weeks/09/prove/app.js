@@ -10,17 +10,11 @@ app.set("view engine", "ejs");
 
 app.get('/', (req, res) => {
 
-    res.write('Testing');
-    res.end();
-
-    /*
     let params = {
         rateTypes: getRateTypes()
     };
 
-    res.setHeader('Content-Type', 'text/html');
     res.render("rate", params);
-    */
 });
 
 app.get('/getRate', (req, res) => {
@@ -50,8 +44,7 @@ app.get('/getRate', (req, res) => {
 
     }
 
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(params));
+    res.json(params);
 });
 
 /**
