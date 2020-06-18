@@ -1,6 +1,5 @@
 const express = require('express');
 const url     = require('url');
-const e = require('express');
 
 const app  = express();
 const port = process.env.PORT || '8000';
