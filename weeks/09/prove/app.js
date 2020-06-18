@@ -14,9 +14,7 @@ app.get('/', (req, res) => {
         rateTypes: getRateTypes()
     };
 
-    res.json(params);
-
-    //res.render("rate", params);
+    res.render("rate", params);
 });
 
 app.get('/getRate', (req, res) => {

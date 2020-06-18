@@ -11,7 +11,17 @@
     <form class="form-rate-calculator">
         <h1 class="h3 mb-3 font-weight-normal text-center">Calculate Postal Rate</h1>
         <div class="form-group row mb-4 mt-4">
-        
+        <% rateTypes.forEach( function(rate) { %>
+                <div class="form-check" style="width:100%">
+                    <input class="form-check-input" type="radio" name="type" id="<%= rate.key %>" value="<%= rate.key %>" required>
+                    <label class="form-check-label" for="<%= rate.key %>">
+                        <%= rate.value %>
+                    </label>
+                    <small class="form-text text-muted mt-0 mb-2">
+                        Max Weight: <%= rate.maxWeight %>oz
+                    </small>
+                </div>
+        <% }); %>
         </div>
         <div class="form-group row">
             <label for="rateType" class="sr-only">Weight</label>
