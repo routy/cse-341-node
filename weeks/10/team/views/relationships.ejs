@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Relationships</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Relationships!</h1>
+
+    <form>
+        <label for="personId">Person ID:</label><br>
+        <input type="number" id="personId" name="id"><br>
+        <button type="button" id="getParents">Parents</button>
+        <button type="button" id="getChildren">Children</button>
+    </form>
+    
+    <div id="results">
+    </div>
+
+    <script>
+        $( "#getParents" ).on( 'click', function( event ) {
+            event.preventDefault();
+            var data = $("form").serialize();
+            $.ajax({
+                url: "/getParents",
+                type: "GET",
+                data: data,
+                complete: function(response) {
+                    $('#results').text(response.responseText);
+                }
+            });
+        });
+        $( "#getChildren" ).on( 'click', function( event ) {
+            event.preventDefault();
+            var data = $("form").serialize();
+            $.ajax({
+                url: "/getChildren",
+                type: "GET",
+                data: data,
+                complete: function(response) {
+                    $('#results').text(response.responseText);
+                }
+            });
+        });
+      </script>
+</body> 
+</html>
