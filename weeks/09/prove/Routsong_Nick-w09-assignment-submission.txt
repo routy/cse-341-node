@@ -1,0 +1,32 @@
+After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
+
+1. Copy and paste the URL for your web application:
+https://w09-prove.herokuapp.com/
+
+2. Copy and paste the URL for your source code repository (e.g., GitHub):
+https://github.com/routy/cse-341-node/tree/master/weeks/09/prove
+
+3. Briefly list and describe the elements of the application that are functioning. Include any special instructions about how to login and/or use your application.
+Application accepts a type and weight value from the form, performs an ajax request to a getRate endpoint and receives a JSON response, and displays the response in an alert.
+
+4. Briefly describe any pieces of the assignment that are not yet working correctly.
+N/A
+
+5. Briefly describe the "coolest" thing you learned while completing this assignment.
+I'm new to using node, so just about each aspect was pretty cool.
+
+6. In your own words, briefly describe the concept of a callback function and why it is useful.
+Callback functions are passed into another function that then executes that callback once the parent function has completed. This ensures that order of execution is respected.
+
+7. Please select the category you feel best describes your assignment:
+1 - Some attempt was made
+2 - Developing, but significantly deficient
+3 - Slightly deficient, but still mostly adequate
+4 - Meets requirements
+[5] - Shows creativity and excels above and beyond requirements
+
+
+8. Provide a brief justification (1-2 sentences) for selecting that category.
+- Added bootstrap and formatted the form to ensure a professional look.
+- Used AJAX to perform the rate calculation with an alert to give the user an instant response.
+- Error handling in case the user passes a value outside of the expected criteria.
