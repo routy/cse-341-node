@@ -65,7 +65,7 @@ app.get('/search', function(req, res) {
     let requestUrl = 'filter.php?c=' + category;
 
     if (keyword) {
-        let requestUrl = 'search.php?s=' + keyword;
+        requestUrl = 'search.php?s=' + keyword;
     }
 
     axios.get(api_url + requestUrl).then(function (response) {
