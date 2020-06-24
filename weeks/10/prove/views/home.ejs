@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mealicious</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-recipe-search">
+                    <h1 class="h3 mb-3 font-weight-normal text-center">Recipe Search</h1>
+                    <div class="form-group row mb-4 mt-4">
+                        <select class="custom-select d-block w-100" id="category" name="category">
+                            <option value="">Choose...</option>
+                            <% categories.forEach( function(category) { %>
+                                <option value="<%= category.strCategory %>"><%= category.strCategory %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <p class="text-center">- or -</p>
+                    <div class="form-group row">
+                        <label for="keyword" class="sr-only">Keyword</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">Keyword</div>
+                            </div>
+                            <input type="text" id="Keyword" name="keyword" class="form-control" placeholder="Arrabiata">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Get Recipe</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        <div id="response"></div>
+      </div>
+
+  <script>
+
+    $( "form" ).on( 'submit', function( event ) {
+
+        event.preventDefault();
+
+        var data = $("form").serialize();
+        
+        $.ajax({
+            url: "/search",
+            type: "GET",
+            data: data,
+            complete: function(response) {
+                response = response.responseJSON;
+                console.log(response);
+                if (response && response.length > 0) {
+                    let mealHtml = '<div class="row">';
+                    response.forEach(function(meal) {
+                        mealHtml += 
+                        '<div class="col-md-4">' +
+                            '<div class="card mb-4 shadow-sm">' +
+                            '<div class="card-img-top meal-image" style="background-image: url(' + meal.strMealThumb + ');"></div>' +
+                            '<div class="card-body">' +
+                                '<p class="card-text">' + meal.strMeal + '</p>' +
+                                '<div class="d-flex justify-content-between align-items-center">' +
+                                '<button type="button btn-block btn-primary" data-mealId="' + meal.idMeal + '" class="btn btn-sm btn-outline-secondary">View</button>' +
+                                '</div>' +
+                            '</div>' +
+                            '</div>' +
+                        '</div>';
+                    });
+                    mealHtml += '</div>';
+
+                    $('#response').html(mealHtml);
+
+                } else {
+                    $('#response').html('<p class="alert-danger">No recipes matched your search criteria. Please try again.</p>');
+                }
+            }
+        });
+    });
+
+  </script>
+
+</body>
+</html>
