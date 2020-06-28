@@ -13,6 +13,7 @@ https://github.com/routy/cse-341-node/tree/master/weeks/11/prove
 - Added ability to view single recipes, their ingredients, and the instructions for making the meal
 - Updated the search to be inline/horizontal rather than vertical allowing for less space consumption
 - Added a loading stage
+- Added secondary endpoint (/recipe?id={id}) for retrieving a single recipe
 
 5. Describe the features that are not yet working correctly.
 N/A
