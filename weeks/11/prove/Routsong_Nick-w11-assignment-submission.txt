@@ -10,20 +10,24 @@ https://w11-prove.herokuapp.com/
 https://github.com/routy/cse-341-node/tree/master/weeks/11/prove
 
 4. Describe the functionality that is currently working, along with any special instructions of how to use your web application:
-
+- Added ability to view single recipes, their ingredients, and the instructions for making the meal
+- Updated the search to be inline/horizontal rather than vertical allowing for less space consumption
+- Added a loading stage
 
 5. Describe the features that are not yet working correctly.
-
+N/A
 
 6. Please select the category you feel best describes your assignment:
 1 - Some attempt was made
 2 - Developing, but significantly deficient
 3 - Slightly deficient, but still mostly adequate
 4 - Meets requirements
-5 - Shows creativity and excels above and beyond requirements
-
+(5) - Shows creativity and excels above and beyond requirements
 
 7. Provide a brief justification (1-2 sentences) for selecting that category.
-
+- Added styling to further enhance the look and experience for users
+- Added a loader that will show/hide when searching for recipes
+- App is fully functional and is able to be used to search for and use recipes
 
 8. Please list any questions you have for the instructor regarding this assignment or this week's topic.
+N/A
