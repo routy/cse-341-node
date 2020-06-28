@@ -1,25 +1,26 @@
 After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
 
-1. Copy and paste the URL for your web application:
+1. Project title / one sentence description:
+Mealicious - Search and display recipes
+
+2. Copy and paste the URL for your site at Heroku:
 https://w10-prove.herokuapp.com/
 
-2. Copy and paste the URL for your source code repository (e.g., GitHub):
+3. Copy and paste the URL for your source code repository (e.g., GitHub):
 https://github.com/routy/cse-341-node/tree/master/weeks/10/prove
 
-3. Briefly list and describe the elements of the application that are functioning. Include any special instructions about how to login and/or use your application.
+4. Describe the component that you completed from end-to-end:
+I completed the ability to select a category or provide a keyword search and a list of meals will be displayed to the user.
 
-4. Briefly describe any pieces of the assignment that are not yet working correctly.
-
-5. Briefly describe the "coolest" thing you learned while completing this assignment.
-
-6. In your own words, briefly describe the concept of a callback function and why it is useful.
-
-7. Please select the category you feel best describes your assignment:
-1 - Some attempt was made
-2 - Developing, but significantly deficient
-3 - Slightly deficient, but still mostly adequate
-4 - Meets requirements
+5. Please select the category you feel best describes your assignment:
+ 1 - Some attempt was made
+ 2 - Developing, but significantly deficient
+ 3 - Slightly deficient, but still mostly adequate
+ 4 - Meets requirements
 [5] - Shows creativity and excels above and beyond requirements
 
+6. Provide a brief justification (1-2 sentences) for selecting that category.
+The initial implementation allows multiple search filter options as well as a professional look in displaying recipe options.
 
-8. Provide a brief justification (1-2 sentences) for selecting that category.
+7. Please list any questions you have for the instructor regarding this assignment or this week's topic.
+No questions.
