@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Movies</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Movies!</h1>
+
+    <form>
+        <label for="search">Search:</label><br>
+        <input type="text" id="search" name="s"><br>
+        <button type="submit">Search</button>
+    </form>
+    
+    <div id="results">
+    </div>
+
+    <script>
+    
+        $( "form" ).on( 'submit', function( event ) {
+            event.preventDefault();
+            var data = $("form").serialize();
+            $.ajax({
+                url: "/search",
+                type: "GET",
+                data: data,
+                complete: function(response) {
+                    $('#results').text(response.responseText);
+                }
+            });
+        });
+      </script>
+</body> 
+</html>
