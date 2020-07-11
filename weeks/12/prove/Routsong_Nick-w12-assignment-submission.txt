@@ -4,16 +4,17 @@ After completing the assignment, please answer the questions in this text file a
 Mealicious - Search and display recipes
 
 2. Copy and paste the URL for your web application (if applicable):
-https://w11-prove.herokuapp.com/
+https://w12-prove.herokuapp.com/
 
 3. Copy and paste the URL for your source code repository (e.g., GitHub):
-https://github.com/routy/cse-341-node/tree/master/weeks/11/prove
+https://github.com/routy/cse-341-node/tree/master/weeks/12/prove
 
 4. Describe the functionality that is currently working, along with any special instructions of how to use your web application:
 - Added ability to view single recipes, their ingredients, and the instructions for making the meal
 - Updated the search to be inline/horizontal rather than vertical allowing for less space consumption
 - Added a loading stage
 - Added secondary endpoint (/recipe?id={id}) for retrieving a single recipe
+- Added ability to mark a recipe as a favorite (Cookie Storage - no login required)
 
 5. Describe the features that are not yet working correctly.
 N/A
@@ -28,6 +29,7 @@ N/A
 7. Provide a brief justification (1-2 sentences) for selecting that category.
 - Added styling to further enhance the look and experience for users
 - Added a loader that will show/hide when searching for recipes
+- Added ability for users to save their favorite recipes (Cookie Storage - no login required)
 - App is fully functional and is able to be used to search for and use recipes
 
 8. Please list any questions you have for the instructor regarding this assignment or this week's topic.
