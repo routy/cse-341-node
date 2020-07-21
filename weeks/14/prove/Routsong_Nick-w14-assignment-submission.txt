@@ -1,36 +1,66 @@
-After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
+After completing your final project, please answer the questions in this text file and submit it to I-Learn.
 
-1. Project Title / One sentence description:
+1. Project title / one sentence description:
 Mealicious - Search and display recipes
 
-2. Copy and paste the URL for your web application (if applicable):
-https://w12-prove.herokuapp.com/
+2. The Heroku URL for your web application:
+https://w14-prove.herokuapp.com/
 
-3. Copy and paste the URL for your source code repository (e.g., GitHub):
-https://github.com/routy/cse-341-node/tree/master/weeks/12/prove
+3. The GitHub URL for your source code repository:
+https://github.com/routy/cse-341-node/tree/master/weeks/14/prove
 
-4. Describe the functionality that is currently working, along with any special instructions of how to use your web application:
-- Added ability to view single recipes, their ingredients, and the instructions for making the meal
-- Updated the search to be inline/horizontal rather than vertical allowing for less space consumption
-- Added a loading stage
-- Added secondary endpoint (/recipe?id={id}) for retrieving a single recipe
-- Added ability to mark a recipe as a favorite (Cookie Storage - no login required)
+4. Please provide a brief description of what your project does and how to use the application. Make sure to include any required information like a username and password.
+Mealicous connects with TheMealDB API to provide access to recipes. Users are initially presented with a search interface
+that allows them to select a food category or to search via searchbox. Any matching recipes are displayed to the user for 
+selection. The user can then choose to 'heart' a recipe, which will be stored in a browser cookie for future visits, or 
+they can view the recipe details. Details include an ingredients list, detailed recipe, and an image of the dish.
 
-5. Describe the features that are not yet working correctly.
-N/A
+5. Briefly describe any pieces of the assignment that are not yet working correctly.
+All features are functional.
 
-6. Please select the category you feel best describes your assignment:
+
+--------------------------------
+Project Self-assessment
+--------------------------------
+
+For each of the following requirements, please replace the "(YES/NO)" with either "YES" or "NO" as to whether or not your work met this requirement.
+
+Requirements
+------------
+(YES) 1. Your web application is running in Heroku.
+(YES) 2. Your latest source code is in GitHub.
+(YES) 3. Your web application is hosted on Node.js.
+(YES) 4. Your web application exposes one or more web services in Node.js.
+(YES) 5. Your web application consumes one or more of your web services from the browser.
+(YES) 6. Your web application has a data layer of either a database or third-party web service.
+
+For each of the following criteria, please replace the "(1-5)" with either the "1", "2", "3", "4", or "5" category you feel best describes your work.
+
+Categories
+----------
 1 - Some attempt was made
 2 - Developing, but significantly deficient
 3 - Slightly deficient, but still mostly adequate
 4 - Meets requirements
-(5) - Shows creativity and excels above and beyond requirements
+5 - Shows creativity and excels above and beyond requirements
 
-7. Provide a brief justification (1-2 sentences) for selecting that category.
-- Added styling to further enhance the look and experience for users
-- Added a loader that will show/hide when searching for recipes
-- Added ability for users to save their favorite recipes (Cookie Storage - no login required)
-- App is fully functional and is able to be used to search for and use recipes
+Criteria
+----------
+(5) 1. Professional look and feel.
+(5) 2. Accomplishes a meaningful/interesting task.
+(5) 3. Demonstrates skill with HTML, CSS, and JavaScript.
+(5) 4. Demonstrates skill with Node.js.
+(5) 5. Demonstrates skill with Express.
+(5) 6. Demonstrates skill with web services.
+(5) 7. Demonstrates skill with client/server communication.
+(5) 8. Overall project evaluation.
 
-8. Please list any questions you have for the instructor regarding this assignment or this week's topic.
-N/A
+9. Finally, please provide an overall description/justification of the categories you selected.
+
+Application was developed as a SPA, ensuring that only new content is loaded into the view rather than
+reloading the full page contents. The application leverages the bootstrap framework to provide a simple, 
+modern interface for interacting with the application. The application fulfills all project requirements 
+and exposes functionality beyond them. For example, the addition of the 'Favorites' feature that allows 
+users to save a recipe they liked as one of their favorites allows for users to easily see which recipes 
+they have liked previously, without the need to require the user to create an account or login. None of 
+the features are half-baked and all come fully functional. 
