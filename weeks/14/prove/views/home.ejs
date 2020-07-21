@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mealicious</title>
+    <!-- Include Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Include Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                
+                <div class="text-center">
+                    <h1 class="h1 mb-3 font-weight-normal text-center">Mealicious</h1>
+                    <span class="h4">Find Your Next Taste Sensation</span>
+                </div>
+
+                <form class="form-inline form-recipe-search">
+                    
+                    <div class="form-group">
+                        <select class="custom-select d-block w-100" id="category" name="category">
+                            <option value="">Choose...</option>
+                            <% categories.forEach( function(category) { %>
+                            <option value="<%= category.strCategory %>"><%= category.strCategory %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <label for="keyword" class="sr-only">Keyword</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Keyword</div>
+                            </div>
+                            <input type="text" id="Keyword" name="keyword" class="form-control" placeholder="Arrabiata">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search Recipes</button>
+                    <div class="loading" class="mb-3 mt-4">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                  </form>
+
+            </div>
+        </div>
+        <div id="response"></div>
+    </div>
+
+    <!-- Include JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+
+    <script>
+        function toggleLoading() {
+            $('.loading').toggle();
+        }
+
+        /**
+         * https://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
+         */ 
+        function nl2br (str, is_xhtml) {   
+            var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br /><br />' : '<br><br>';    
+            return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+        }
+
+        $("form").on('submit', function (event) {
+
+            event.preventDefault();
+
+            let form = $(this);
+
+            toggleLoading();
+            form.find('button[type="submit"]').first().prop('disabled', true);
+
+            var data = form.serialize();
+
+            $.ajax({
+                url: "/search",
+                type: "GET",
+                data: data,
+                complete: function (response) {
+                    response = response.responseJSON;
+
+                    const favorites = getFavorites();
+
+                    toggleLoading();
+                    form.find('button[type="submit"]').first().prop('disabled', false);
+
+                    if (response && response.length > 0) {
+                        let mealHtml = '<div class="row">';
+                        response.forEach(function (meal) {
+
+                            mealHtml +=
+                                '<div class="col-md-4">' +
+                                    '<div class="recipe-card card mb-4 shadow-sm" data-meal_id="' + meal.idMeal + '">' +
+                                        '<div class="card-img-top recipe-image" style="background-image: url(' + meal.strMealThumb + ');"></div>' +
+                                        '<div class="card-body">' +
+                                            '<p class="card-text text-truncate text-center">' + meal.strMeal + '</p>' +
+                                            '<div class="d-flex justify-content-between align-items-center">' +
+                                                '<button class="toggle-favorite btn btn-outline-secondary mr-1" data-meal_id="' + meal.idMeal + '">' +
+                                                    '<ion-icon name="' + ( ( favorites.indexOf(parseInt(meal.idMeal)) > -1 ) ? 'heart' : 'heart-outline') + '"></ion-icon>' +
+                                                '</button>' +
+                                                '<button class="btn btn-block btn-outline-primary view-recipe">View</button>' +
+                                            '</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>';
+                        });
+                        mealHtml += '</div>';
+
+                        $('#response').html(mealHtml);
+
+                    } else {
+                        $('#response').html('<div class="alert alert-danger" role="alert">No recipes matched your search criteria. Please try again.</div>');
+                    }
+
+                }
+            });
+        });
+
+        $(document).ready(function () {
+
+            $('body').on('click', '.toggle-favorite', function () {
+
+                let mealId      = $(this).data('meal_id');
+                let favorites   = getFavorites();
+                let addFavorite = true;
+
+                if (favorites.length > 0) {
+                    if (favorites.find(favorite => favorite === mealId) ) {
+                        // If the favorite was found in the cookie, let's remove the favorite
+                        addFavorite = false;
+                    }
+                }
+
+                if (addFavorite === true) {
+                    favorites.push( mealId );
+                    let favoritesJson = JSON.stringify( favorites );
+                    setCookie('favorites', favoritesJson);
+                    $(this).find('ion-icon').prop('name', 'heart');
+                } else {
+                    favorites.splice(favorites.indexOf(mealId), 1);
+                    favorites = JSON.stringify( (favorites.length > 0) ? favorites : [] );
+                    setCookie('favorites', favorites );
+                    $(this).find('ion-icon').prop('name', 'heart-outline');                 
+                }
+            });
+
+            $('body').on('click', '.recipe-card .recipe-image, .recipe-card button.view-recipe', function () {
+                let parentCard = $(this).parents('.recipe-card').first();
+                const mealId = parentCard.data('meal_id');
+
+                toggleLoading();
+
+                $.ajax({
+                    url: "/recipe?id=" + mealId,
+                    type: "GET",
+                    complete: function (response) {
+                        response = response.responseJSON;
+
+                        toggleLoading();
+
+                        if (response) {
+                            const meal = response;
+
+                            let ingredientsHtml = '<h4 class="h4 mt-3">Ingredients</h4>';
+                            ingredientsHtml += '<ul class="recipe-ingredients">';
+                            let ingredientsLoop = true;
+                            
+                            for(let i = 1; ingredientsLoop; i++) {
+                                if(meal['strIngredient' + i] === '' || meal['strIngredient' + i] === null || meal['strIngredient' + i] === undefined) {
+                                    ingredientsLoop = false;
+                                    break;
+                                }
+                                ingredientsHtml += 
+                                    '<li>' +
+                                        '<span class="recipe-ingredient">' + meal['strIngredient' + i] + ': </span>' +
+                                        '<span class="recipe-measure">' + meal['strMeasure' + i]  + '</span>' +
+                                    '</li>';
+                            }
+                            
+                            ingredientsHtml += '</ul>';
+
+                            let mealHtml = '<div class="row">';
+
+                            mealHtml +=
+                                '<div class="col-md-4">' +
+                                    '<div class="recipe-image" style="background-image: url(' + meal.strMealThumb + ');"></div>' +
+                                    ingredientsHtml +
+                                '</div>' +
+                                '<div id="recipe-instructions-wrapper" class="col-md-8">' +
+                                    '<h2 class="h2">' + meal.strMeal + '</h2>' +
+                                    '<p id="recipe-instructions">' + nl2br(meal.strInstructions) + '</p>';
+                            
+                            if (meal.strSource) {
+                                mealHtml += '<div>Source: <a href="' + meal.strSource + '" id="recipe-source">' + meal.strSource + '</a></div>';
+                            }
+                                           
+                            mealHtml += '</div></div>';
+
+                            $('#response').html(mealHtml);
+
+                        } else {
+                            $('#response').html('<div class="alert alert-danger" role="alert">No recipe matched your search criteria. Please try again.</div>');
+                        }
+
+                    }
+                });
+            });
+        });
+
+        /**
+         * Retrieve saved favorites
+         */ 
+        function getFavorites()
+        {
+            let favorites = getCookie('favorites');
+            return ( favorites ) ? JSON.parse( favorites ) : [];
+        }
+
+        /**
+         * Set Cookie
+         */ 
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        /**
+         * Get Cookie
+         */  
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return
+             "";
+        }
+    </script>
+
+</body>
+
+</html>
